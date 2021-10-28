@@ -1,0 +1,79 @@
+// Given a string, you need to test if it is palindrome or not. If the string is palindrome print “YES”, otherwise print “NO”.
+
+import java.util.Scanner;
+
+class Result{
+static int firstPos(String str,
+                    int start,
+                    int end)
+{
+    int firstChar = -1;
+    for(int i = start; i <= end; i++)
+    {
+        if(str.charAt(i) >= 'a'&&
+        str.charAt(i) <= 'z')
+        {
+            firstChar = i;
+            break;
+        }
+    }
+    return firstChar;
+}
+static int lastPos(String str,
+                int start,
+                int end)
+{
+    int lastChar = -1;
+    for(int i = start; i >= end; i--)
+    {
+        if(str.charAt(i) >= 'a'&&
+        str.charAt(i) <= 'z')
+        {
+            lastChar = i;
+            break;
+        }
+    }
+    return lastChar;
+}
+static boolean isPalindrome(String str)
+{
+    int firstChar = 0,
+        lastChar = str.length() - 1;
+    boolean ch = true;
+    for (int i = 0; i < str.length(); i++)
+    {
+        firstChar = firstPos(str, firstChar,
+                                lastChar);
+        lastChar = lastPos(str, lastChar,
+                                firstChar);
+        if (lastChar < 0 || firstChar < 0)
+            break;
+        if (str.charAt(firstChar) ==
+            str.charAt(lastChar))
+        {
+            firstChar++;
+            lastChar--;
+            continue;
+        }
+        ch = false;
+        break;
+    }
+        return ch;
+}
+}
+
+class Main{
+    public static void main(String[] args)
+    {
+      Scanner in = new Scanner(System.in);
+      int t = in.nextInt();
+      for(int i = 0;i<t;i++){
+        String str = in.next();
+        if(Result.isPalindrome(str)){
+          System.out.println("YES");
+        }else{
+          System.out.println("NO");
+        }
+      }
+    }
+}
